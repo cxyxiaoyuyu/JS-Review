@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现Function.prototype.call</title>
+</head>
+<body>
+  <script>
+    Function.prototype.myCall = function(){
+      const [_this,...args] = arguments
+      _this.function = this
+      const res =  _this.function(...args)
+      delete _this.function
+      return res
+    }
+
+    function f(p1,p2){
+      return p1 + p2
+    }
+
+    const res = f.myCall({aaa:123},2,3)
+    console.log(res)
+  </script>
+</body>
+</html>
