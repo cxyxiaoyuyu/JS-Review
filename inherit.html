@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js 模拟继承</title>
+</head>
+
+<body>
+  <script>
+    // 1 自身的属性
+    // 2 原型上的属性
+
+    function Animal(name){
+      this.name = name
+      this.eat = function(){
+        console.log(this.name + ' is eating') 
+      }
+    }
+    Animal.prototype.run = function(){
+      console.log(this.name + ' is runing')  
+    }
+
+    const a = new Animal('aaa')
+    console.log(a)
+
+    function Cat(){
+      Animal.call(this,'cat')
+    }
+
+    // a.__proto__ = Animal.prototype
+    // a.run()
+
+    // Cat.prototype.__proto__ = Animal.prototype
+    // Cat.prototype = new Animal()
+    
+    // function f(){}
+    // f.prototype = Animal.prototype
+    // Cat.prototype = new f()
+
+    Cat.prototype = Object.create(Animal.prototype)
+    Cat.prototype.constructor = Cat
+
+    const cat = new Cat()
+    console.log(cat)
+    cat.run()
+
+    // cat.__proto__ => Cat.prototype
+    // Cat.prototype.__proto__ => Aniaml.prototype 
+
+    // es6 class
+    class Parent {
+      constructor(name){
+        this.name = name 
+        this.eat = function(){
+          console.log(this.name + ' is eating') 
+        }
+      }
+      run(){
+        console.log(this.name + ' is runing') 
+      }
+    }
+
+    class Child extends Parent{
+      constructor(){
+        super('child')
+      } 
+    }
+
+    const p = new Parent('parent')
+    console.log(p)
+    p.eat()
+
+
+    const c = new Child()
+    console.log(c)
+    c.eat()
+    c.run()
+
+  </script>
+</body>
+
+</html>
