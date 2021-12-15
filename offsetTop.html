@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .box1 {
+      height: 100vh;
+      margin-top: 50px;
+      border: 1px solid red;
+    } 
+    .box2{
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div class="box1"></div> 
+  <div class="box2">看不到我</div>
+  <script>
+    // window.scrollY 页面滚动高度
+    // window.innerHeight 页面可视高度
+
+    // ele.offsetTop  元素距离页面顶部高度
+    // ele.offsetHeight  元素自身高度
+
+    window.onscroll = function(){
+      var box = document.querySelector('.box')
+      if(window.scrollY + window.innerHeight >= box.offsetTop+box.offsetHeight){
+        console.log('I see you')
+      } 
+    }
+  </script>
+</body>
+</html>
