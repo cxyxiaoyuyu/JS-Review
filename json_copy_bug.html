@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用JSON深拷贝的问题</title>
+</head>
+<body>
+  <script>
+    function parse(obj){
+      console.log(JSON.parse(JSON.stringify(obj)))
+    }
+
+    // 1 时间对象变为字符串
+    parse(new Date())
+
+    // 2 RegExp Error对象变为空对象  
+    parse(/123/)  // {}
+    parse(new Error('err')) // {}
+
+    // 3 不能拷贝undefined 和 函数
+    // parse(undefined)   // 报错
+    // parse(function(){}) // 报错
+
+    // 4 对象里的 函数 undefined 丢失
+    // 5 NaN infinity 变成 null
+    const obj = {
+      a:'a',
+      b: undefined,
+      c: function(){
+        console.log('this is a fnction') 
+      },
+      d: NaN,
+      e: Infinity,
+    }
+    parse(obj)  // {a: 'a',d:null,e: null}
+
+    // 6 不能拷贝循环引用
+    const circularRefrence = {
+      value: 'circular'
+    }
+    circularRefrence.info = circularRefrence
+    parse(circularRefrence)
+
+  </script>
+</body>
+</html>
