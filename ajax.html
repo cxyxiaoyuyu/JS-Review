@@ -20,6 +20,15 @@
     // 4 下载操作已完成。
 
     const xhr = new XMLHttpRequest()
+
+    // 跨域请求是否携带凭据信息(cookie、HTTP认证及客户端SSL证明)
+    // 需要注意是，当配置了xhr.withCredentials = true时，
+    // 必须在后端增加 response 头信息Access-Control-Allow-Origin
+    // 且必须指定域名，而不能指定为 * 
+    // 所以这里设为false  
+    xhr.withCredentials = false
+
+
     xhr.onreadystatechange = function () {
       if (this.readyState === 4) {
         if (this.status >= 200 && this.status < 300) {
