@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发送ajax请求</title>
+</head>
+
+<body>
+  <script>
+    // 测试本页面 请启动server.js 
+
+    // xhr.readyState 有五种状态 
+    // 0 代理被创建，但尚未调用 open() 方法。
+    // 1 open() 方法已经被调用。
+    // 2 send() 方法已经被调用，并且头部和状态已经可获得。
+    // 3 下载中； responseText 属性已经包含部分数据。
+    // 4 下载操作已完成。
+
+    const xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        if (this.status >= 200 && this.status < 300) {
+          console.log(this.responseText, 'success')
+        } else {
+          console.log(this.statusText, 'error')
+        }
+      }
+    }
+    xhr.open('GET', 'http://localhost:3000/data')
+    xhr.send()
+  </script>
+</body>
+
+</html>
