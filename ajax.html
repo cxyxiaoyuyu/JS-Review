@@ -26,10 +26,11 @@
     // 必须在后端增加 response 头信息Access-Control-Allow-Origin
     // 且必须指定域名，而不能指定为 * 
     // 所以这里设为false  
-    xhr.withCredentials = false
+    // xhr.withCredentials = false
 
 
     xhr.onreadystatechange = function () {
+      console.log(this.readyState)
       if (this.readyState === 4) {
         if (this.status >= 200 && this.status < 300) {
           console.log(this.responseText, 'success')
@@ -38,8 +39,23 @@
         }
       }
     }
-    xhr.open('GET', 'http://localhost:3000/data')
-    xhr.send()
+    xhr.open('GET', 'http://localhost:3000/data?user=person&pwd=password&organization=place&requiredkey=key')
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send();
+
+    // 发送post请求 FormData
+    // xhr.open('POST', 'http://localhost:3000/data')
+    // let formdata = new FormData()
+    // formdata.append('name','xiaoyu')
+    // xhr.send(formdata)
+
+    // 发送post请求 application/x-www-form-urlencoded
+    // xhr.open('POST', 'http://localhost:3000/data')
+    // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // xhr.send('user=xiaoyu&name=18')
+
+
+
   </script>
 </body>
 
