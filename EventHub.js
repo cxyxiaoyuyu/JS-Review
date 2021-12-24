@@ -5,9 +5,17 @@ function EventHub() {
     callbacks[eventName].push(fn)
   }
   this.once = function (eventName,fn) {
-    callbacks[eventName] = callbacks[eventName] || []
-    callbacks[eventName].push(fn)
-    fn.once = true
+    // callbacks[eventName] = callbacks[eventName] || []
+    // callbacks[eventName].push(fn)
+    // fn.once = true
+
+    const _this = this
+    function xxx(){
+      _this.off(eventName,xxx) 
+      fn(...arguments)
+    }
+    // xxx.fn = fn
+    this.on(eventName,xxx)
   }
   this.emit = function (eventName, param) {
     const fnList = callbacks[eventName]
@@ -43,7 +51,7 @@ const bus = new EventHub()
 // bus.off('aaa',fn)
 // bus.emit('aaa')
 
-bus.once('bbb',function(){console.log('该事件只执行一次')})
-bus.emit('bbb')
-bus.emit('bbb')
-bus.emit('bbb')
+bus.once('bbb',function(name){console.log('该事件只执行一次'+name)})
+bus.emit('bbb','once')
+bus.emit('bbb','once')
+bus.emit('bbb','once')
