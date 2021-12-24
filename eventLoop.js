@@ -12,24 +12,24 @@
 // console.log('script end')
 
 // 题目2 我不是很理解
-Promise.resolve().then(()=>{
-  console.log(0)
-  return Promise.resolve(4)
-}).then(res => {
-  console.log(res)
-})
+// Promise.resolve().then(()=>{
+//   console.log(0)
+//   return Promise.resolve(4)
+// }).then(res => {
+//   console.log(res)
+// })
 
-Promise.resolve().then(() => {
-  console.log(1)
-}).then(()=>{
-  console.log(2)
-}).then(()=>{
-  console.log(3)
-}).then(()=>{
-  console.log(5)
-}).then(()=>{
-  console.log(6)
-})
+// Promise.resolve().then(() => {
+//   console.log(1)
+// }).then(()=>{
+//   console.log(2)
+// }).then(()=>{
+//   console.log(3)
+// }).then(()=>{
+//   console.log(5)
+// }).then(()=>{
+//   console.log(6)
+// })
 
 // 题目3 
 // setTimeout(_ => console.log(4))  // 宏任务
@@ -113,4 +113,50 @@ Promise.resolve().then(() => {
 //   })
 
 // console.log('script end')
+
+// 题目7 
+// setTimeout(() => {
+//   console.log('timeout');
+// }, 0);
+
+// setImmediate(() => {
+//   console.log('immediate');
+// });
+
+// process.nextTick(()=>{
+//   console.log('nextTick')
+// })
+
+// 题目8
+// Timer
+setTimeout(() => {
+  console.log('Timer phase')
+  process.nextTick(() => {
+    console.log('Timer phase - nextTick')
+  })
+  Promise.resolve().then(() => {
+    console.log('Timer phase - promise')
+  })
+});
+
+// Check
+setImmediate(() => {
+  console.log('Check phase')
+  process.nextTick(() => {
+    console.log('Check phase - nextTick')
+  })
+  Promise.resolve().then(() => {
+    console.log('Check phase - promise')
+  })
+})
+
+// 主线程任务
+console.log('执行js');
+process.nextTick(() => {
+  console.log('nextTick')
+})
+Promise.resolve().then(() => {
+  console.log('promise')
+})
+
 
