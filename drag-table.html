@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>火星黑洞</title>
+  </head>
+
+  <body>
+    <table id="table" cellspacing="0" cellpadding="1" width="100%" border="1">
+      <tbody>
+        <tr align="center" bgcolor="#1890ff">
+          <td style="width:100px;">id</td>
+          <td>公司名称</td>
+          <td>姓名</td>
+          <td>岗位</td>
+          <td>技术等级</td>
+          <td>年龄</td>
+          <td>民族</td>
+          <td>籍贯</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>科技有限公司</td>
+          <td>火星黑洞</td>
+          <td>web开发</td>
+          <td>吼吼吼</td>
+          <td>22</td>
+          <td>汉</td>
+          <td>湖北</td>
+        </tr>
+      </tbody>
+    </table>
+    <script type="text/javascript">
+        var tTD;
+        var table = document.getElementById("table");
+        console.log(table.rows[0].cells)
+        for (i = 0; i < table.rows[0].cells.length; i++) {
+            table.rows[0].cells[i].onmousedown = function() {
+                console.log('onmounseDown')
+                tTD = this;
+                if (event.offsetX > tTD.offsetWidth - 10) {
+                    tTD.mouseDown = true;
+                    tTD.oldX = event.x;
+                    tTD.oldWidth = tTD.offsetWidth;
+                }
+            };
+            table.rows[0].cells[i].onmouseup = function() {
+                if (tTD == undefined) tTD = this;
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            };
+            table.rows[0].cells[i].onmousemove = function() {
+                console.log(event.offsetX,this.offsetWidth)
+                if (event.offsetX > this.offsetWidth - 10)
+                    this.style.cursor = 'col-resize';
+                else
+                    this.style.cursor = 'default';
+                if (tTD == undefined) tTD = this;
+                console.log(tTD.mouseDown,'ttd.mouseDown')
+                if (tTD.mouseDown != null && tTD.mouseDown == true) {
+                    if (tTD.oldWidth + (event.x - tTD.oldX) > 0)
+                        tTD.width = tTD.oldWidth + (event.x - tTD.oldX);  // 现在的宽度 
+                    tTD.style.width = tTD.width;
+                    tTD.style.cursor = 'col-resize';
+                    table = tTD;
+                    while (table.tagName != 'TABLE') table = table.parentElement;
+                    for (j = 0; j < table.rows.length; j++) {
+                        table.rows[j].cells[tTD.cellIndex].width = tTD.width;
+                    }
+                }
+            };
+        }
+    </script>
+  </body>
+
+</html>
