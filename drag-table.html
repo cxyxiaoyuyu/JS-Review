@@ -12,18 +12,12 @@
   </style>
   <body>
     <table id="table" cellspacing="0" cellpadding="1" width="100%" border="1">
-      <colgroup>
-        <col width=100 />
-        <col width=200 />
-        <col width=200/>
-        <col  />
-      </colgroup>
       <tbody>
         <tr align="center" bgcolor="#1890ff">
-          <td>id</td>
-          <td>公司名称</td>
-          <td>姓名</td>
-          <td>岗位</td>
+          <th>id</th>
+          <th>公司名称</th>
+          <th>姓名</th>
+          <th>岗位</th>
         </tr>
         <tr>
           <td>20</td>
@@ -58,17 +52,9 @@
                 else
                     this.style.cursor = 'default';
                 if (tTD == undefined) tTD = this;
-                // tTD = this
                 if (tTD.mouseDown) {
-                    // if (tTD.oldWidth + (event.x - tTD.oldX) > 0)
                     tTD.width = tTD.oldWidth + (event.x - tTD.oldX);  // 现在的宽度 
-                    tTD.style.width = tTD.width;
                     tTD.style.cursor = 'col-resize';
-                    // table = tTD;
-                    // while (table.tagName != 'TABLE') table = table.parentElement;
-                    // for (j = 0; j < table.rows.length; j++) {
-                    //     table.rows[j].cells[tTD.cellIndex].width = tTD.width;
-                    // }
                 }
             };
         }
