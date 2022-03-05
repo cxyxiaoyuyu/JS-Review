@@ -56,3 +56,4 @@ const p12 = Promise._allSettled([ p1, p2, p4 ])
 const p13 = Promise._allSettled([ p1, p4, Promise.reject('123')])
 	.then(console.log)
       .catch(console.log) // 123
+
