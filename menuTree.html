@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+    const data = [
+      {id: 'a',children: [
+        {id: 'a1'},
+        {id: 'a2',children: [
+          {id: 'aa2'}
+        ]}
+      ]} ,
+      {id: 'b',children: [
+        {id: 'b1'},
+        {id: 'b2'},
+        {id: 'b3'}
+      ]},
+      {id: 'c',children: [
+        {id: 'c1',children: [
+          {id: 'cc1',children: [
+            { id: 'cc2'} 
+          ]}  
+        ]} 
+      ]}
+    ] 
+    const app = document.getElementById('app')
+    function createChild(data){
+      const ul = document.createElement('ul')
+      for(let menu of data){
+        const li = document.createElement('li')
+        const span = document.createElement('span')
+        span.innerText = menu.id
+        li.appendChild(span) 
+        if(menu.children){
+          li.appendChild(createChild(menu.children)) 
+        }
+        ul.appendChild(li)
+      }
+      return ul
+    }
+    app.appendChild(createChild(data))
+  </script>
+  </body>
+</html>
