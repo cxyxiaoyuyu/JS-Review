@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>获取页面所有标签</title>
+</head>
+<body>
+  <script>
+    const tags = ['html']
+    const html = document.documentElement
+
+    getChildren(html.children)
+
+    function getChildren(children){
+      for(let node of children){
+        if(tags.indexOf(node.tagName) === -1){
+          tags.push(node.tagName) 
+          if(node.children){
+            getChildren(node.children)
+          }
+        } 
+      }
+    }
+    console.log(tags)
+    
+  </script>
+</body>
+</html>
