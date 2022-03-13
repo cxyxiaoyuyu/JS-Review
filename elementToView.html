@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #box1{
+      /* height: 100vh; */
+      height: 200px;
+      margin-top: 50px;
+      border: 1px solid red;
+      overflow: auto;
+      position: relative;
+    } 
+    #box1Child1 {
+      width: 500px;
+      height: 600px;
+      background: blue;
+    }
+    #box1Child2 {
+      width: 500px;
+      height: 100px;
+      background: pink;
+    }
+    #box2{
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="box1">
+    <div id="box1Child1"></div>
+    <div id="box1Child2"></div>
+  </div> 
+  <div id="box2">看不到我</div>
+  <script>
+    // window.scrollY 页面滚动高度
+    // window.innerHeight 页面可视高度
+
+    // ele.offsetTop  元素距离页面顶部高度
+    // ele.offsetHeight  元素自身高度
+
+    box1 = document.getElementById('box1')
+    box1.onscroll = function(){
+      const box1Child2 = document.getElementById('box1Child2') 
+      console.log(box1.scrollTop,box1.clientHeight)
+      if(box1.scrollTop + box1.clientHeight >= box1Child2.offsetTop){
+        console.log('I see child2')
+      }
+    }
+
+    window.onscroll = function(){
+      var box2 = document.querySelector('#box2')
+      // 方式1 offsetTop
+      // if(window.scrollY + window.innerHeight >= box2.offsetTop){
+        // console.log('I see you')
+      // } 
+      
+      // 方式2 getClientRects()
+      if(box2.getClientRects()[0].top <= window.innerHeight){
+         console.log('I see you')
+      }
+    }
+  </script>
+</body>
+</html>
