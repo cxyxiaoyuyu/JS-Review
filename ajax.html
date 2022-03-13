@@ -21,6 +21,11 @@
 
     const xhr = new XMLHttpRequest()
 
+    // 如果在跨域请求中携带cookie 呢？
+    // 1 前端请求时在request对象中配置"withCredentials": true；
+    // 2 服务端在response的header中配置"Access-Control-Allow-Origin", "http://xxx:${port}";
+    // 3 服务端在response的header中配置"Access-Control-Allow-Credentials", "true"
+
     // 跨域请求是否携带凭据信息(cookie、HTTP认证及客户端SSL证明)
     // 需要注意是，当配置了xhr.withCredentials = true时，
     // 必须在后端增加 response 头信息Access-Control-Allow-Origin
@@ -42,6 +47,9 @@
     xhr.open('GET', 'http://localhost:3000/data?user=person&pwd=password&organization=place&requiredkey=key')
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
+    // xhr.abort()
+
+    // setTimeout(()=>{xhr.about()},0)
 
     // 发送post请求 FormData
     // xhr.open('POST', 'http://localhost:3000/data')
