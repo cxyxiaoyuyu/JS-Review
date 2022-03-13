@@ -27,7 +27,15 @@
     }
     tags = Array.from(new Set(tags))
     console.log(tags)
-    
+
+    // 方式二 获取所有标签
+    const nodeList = document.querySelectorAll('*')
+    let tags = [].map.call(nodeList,node=>node.tagName)
+    tags = Array.from(new Set(tags))
+    console.log(tags) 
+
+    // 合成一行
+    // const tags = Array.from(new Set([].map.call(document.querySelectorAll('*'),node=>node.tagName)))
   </script>
 </body>
 </html>
