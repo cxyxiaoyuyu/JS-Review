@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+
+    <div id="parentElement">
+      <span id="childElement1">foo</span>
+      <span id="childElement2">bar</span>
+    </div>
+    <script>
+    // 创建要插入的节点
+    var newNode = document.createElement("div");
+    newNode.innerText = 'new Node'
+
+    // 获得父节点的引用
+    var parentDiv = document.getElementById('parentElement')
+
+    //实验一：referenceNode 存在 --> 正确返回
+    var sp2 = document.getElementById("childElement2");
+    parentDiv.insertBefore(newNode, sp2);
+
+    // //实验二：referenceNode 为 undefined
+    // var sp2 = undefined; // Not exist a node of id "childElement"
+    // parentDiv.insertBefore(newNode, sp2); //隐式转换到节点类型
+
+    // // //实验三：referenceNode 为字符类型的 "undefined"
+    // var sp2 = "undefined"; //不存在id为"childElement"的referenceNode
+    // parentDiv.insertBefore(newNode, sp2); // Generate "Type Error: Invalid Argument"
+    </script>
+
+  </body>
+</html>
