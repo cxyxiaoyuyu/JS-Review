@@ -8,21 +8,24 @@
 </head>
 <body>
   <script>
-    const tags = ['html']
+    // 方式1 递归
+    let tags = ['html']
     const html = document.documentElement
 
     getChildren(html.children)
 
     function getChildren(children){
       for(let node of children){
-        if(tags.indexOf(node.tagName) === -1){
+        // 这时候并不能去重
+        // if(tags.indexOf(node.tagName) === -1){
           tags.push(node.tagName) 
           if(node.children){
             getChildren(node.children)
           }
-        } 
+        // } 
       }
     }
+    tags = Array.from(new Set(tags))
     console.log(tags)
     
   </script>
