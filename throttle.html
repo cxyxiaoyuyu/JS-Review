@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数节流</title>
+  </head>
+  <body>
+    <a target="_blank"
+      href="https://juejin.cn/post/6844903669389885453#heading-3">参考链接</a>
+    <p>规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。
+    </p>
+    <div><input id="input" type="text"></div>
+    <script>
+    const input = document.querySelector('#input')
+    const obj = {
+      a: 'aaa',
+      query(param){
+        console.log(this.a)
+        console.log('input',param)
+      }
+    }
+    input.addEventListener('input',throttle(obj.query.bind(obj,'xxx'),5000))
+
+    function throttle(fun,delay){
+      let last
+      let timer
+      return function(){
+        let now = +new Date()  // 转为时间戳
+        if (last && now < last + delay) { // 现在距离上一次的时间 小于 delay 
+          clearTimeout(timer)   // 还是要去除上一次的定时器 否则会有很多个定时器
+          timer = setTimeout(function () {
+            last = now
+            fun()
+          }, delay)
+        }else {  // 第一次 还没有定时器 或者 当前时间距离上一次的时间已经大于 delay 
+          last = now
+          fun()
+        }
+      }
+    }
+  </script>
+  </body>
+</html>
