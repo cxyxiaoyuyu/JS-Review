@@ -50,7 +50,8 @@
   <button onclick=pause()>暂停</button>
   <button onclick=start()>开始</button>
   <script id="jsbin-javascript">
-    function pause() {
+    function pause(event) {
+      console.log(this)
       let circle = document.querySelector('.circle')
       circle.classList.add('pause')
     }
